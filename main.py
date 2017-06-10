@@ -2,7 +2,6 @@ import subprocess
 import thread
 import time
 import os
-from directxinput import *
 from keystrokes import *
 from winsound import *
 
@@ -16,23 +15,15 @@ def launch_fight():
     enter_vc()
 
     # skip scenes and labels
-    time.sleep(5)
+    time.sleep(3)
     MessageBeep()
-    for i in xrange(25):
-        # enter_vc()
-        # key(DICT_SC["RETURN"])
-        key_sc(28)
+    for i in xrange(15):
+        enter_vc()
         time.sleep(1)
 
     MessageBeep()
     # insert coins
-    # input_string_sc("55555555111")
-    # input_string_vc("55555555111")
-    for i in xrange(10):
-        key_sc(6)
-        time.sleep(1)
-    for i in xrange(5):
-        key_sc(2)
+    input_string_vc("55555555111")
 
     # select fighter
 

@@ -115,16 +115,6 @@ def key_vc(hexKeyCode):
     time.sleep(0.1)
     release_key_vc(hexKeyCode)
 
-def key_sc(hexKeyCode):
-    press_key_sc(hexKeyCode)
-    time.sleep(0.1)
-    release_key_sc(hexKeyCode)
-
-def key_sdl(str):
-    press_key_sc(DICT_SDL[str])
-    time.sleep(0.1)
-    release_key_sc(DICT_SDL[str])
-
 def press_key_vc(hexKeyCode):
     x = INPUT(type=INPUT_KEYBOARD,
               ki=KEYBDINPUT(wVk=hexKeyCode))
@@ -136,19 +126,6 @@ def release_key_vc(hexKeyCode):
                             dwFlags=KEYEVENTF_KEYUP))
     user32.SendInput(1, ctypes.byref(x), ctypes.sizeof(x))
 
-def press_key_sc(hexKeyCode):
-    extra = ctypes.c_ulong(0)
-    ii_ = Input_I()
-    ii_.ki = KeyBdInput(0, hexKeyCode, 0x0008, 0, ctypes.pointer(extra))
-    x = Input(ctypes.c_ulong(1), ii_)
-    ctypes.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
-
-def release_key_sc(hexKeyCode):
-    extra = ctypes.c_ulong(0)
-    ii_ = Input_I()
-    ii_.ki = KeyBdInput(0, hexKeyCode, 0x0008 | 0x0002, 0, ctypes.pointer(extra))
-    x = Input(ctypes.c_ulong(1), ii_)
-    ctypes.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
 
 def alt_tab():
     """Press Alt+Tab and hold Alt key for 2 seconds
@@ -168,14 +145,7 @@ def input_string_vc(str):
             key_vc(hexValue)
             time.sleep(0.1)
 
-
-def input_string_sc(str):
-    str_lowercase = str.lower()
-    for k in str_lowercase:
-        hexValue = DICT_SC.get(k, -1)
-        if hexValue != -1:
-            key_sc(hexValue)
-            time.sleep(0.1)
-
 def enter_vc():
     press_key_vc(ENTER)
+    time.sleep(0.1)
+    release_key_vc(ENTER)
