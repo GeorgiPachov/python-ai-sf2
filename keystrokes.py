@@ -112,11 +112,18 @@ user32.SendInput.argtypes = (wintypes.UINT, # nInputs
 
 def key_vc(hexKeyCode):
     press_key_vc(hexKeyCode)
+    time.sleep(0.1)
     release_key_vc(hexKeyCode)
 
 def key_sc(hexKeyCode):
     press_key_sc(hexKeyCode)
+    time.sleep(0.1)
     release_key_sc(hexKeyCode)
+
+def key_sdl(str):
+    press_key_sc(DICT_SDL[str])
+    time.sleep(0.1)
+    release_key_sc(DICT_SDL[str])
 
 def press_key_vc(hexKeyCode):
     x = INPUT(type=INPUT_KEYBOARD,
@@ -154,21 +161,21 @@ def alt_tab():
     release_key_vc(ALT) # Alt~
 
 def input_string_vc(str):
-    _input_string(str, DICT_VC)
-
-
-def input_string_sc(str):
-    _input_string(str, DICT_SC)
-
-
-def _input_string(str, dict):
     str_lowercase = str.lower()
     for k in str_lowercase:
-        hexValue = dict.get(k, -1)
+        hexValue = DICT_VC.get(k, -1)
         if hexValue != -1:
             key_vc(hexValue)
             time.sleep(0.1)
 
+
+def input_string_sc(str):
+    str_lowercase = str.lower()
+    for k in str_lowercase:
+        hexValue = DICT_SC.get(k, -1)
+        if hexValue != -1:
+            key_sc(hexValue)
+            time.sleep(0.1)
 
 def enter_vc():
     press_key_vc(ENTER)
